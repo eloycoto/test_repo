@@ -1,0 +1,28 @@
+
+name: Go
+permissions:
+  actions: write
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  pull_request_target:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Testing on bash
+        run: ls .
+
+      - name: Update commit status
+        uses: ouzi-dev/commit-status-updater@v1.1.2
+        with:
+          name: 'Coverage'
+          status: 'error'
+          ignoreForks: false
