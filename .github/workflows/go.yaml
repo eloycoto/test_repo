@@ -1,7 +1,4 @@
-
 name: Go
-permissions:
-  actions: write
 on:
   push:
     branches: [ main ]
@@ -25,19 +22,16 @@ jobs:
           title: Karma Test Coverage
   test:
     runs-on: ubuntu-latest
-    permissions:
-      actions: write
     steps:
       - name: Testing on bash
         run: ls .
-      - name: Update status to pending
-        uses: geekodour/gh-actions-custom-status@v0.0.4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          LAST_COMMIT_SHA: ${{ github.event.client_payload.LAST_COMMIT_SHA }}
-        with:
-          args: >-
-            --state=pending
-            --context=foo-status-update
-            --target_url=https://github.com/${{ github.repository }}/actions
 
+      - uses: actions/github-script@v5
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Welcome, new contributor!'
+            })
