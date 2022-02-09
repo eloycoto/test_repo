@@ -31,6 +31,7 @@ jobs:
       - name: Testing on bash
         run: ls .
       - uses: ouzi-dev/commit-status-updater@v1.1.0
-        ignoreForks: false
-        token: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          ignoreForks: false
+          token: ${{ secrets.GITHUB_TOKEN }}
 
