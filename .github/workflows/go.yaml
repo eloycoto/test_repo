@@ -27,11 +27,10 @@ jobs:
       - name: Testing on bash
         run: ls .
 
-      - uses: ./
+      - name: Coverage report
+        uses: eleboys/test-coverage-report-action@v1.0.2
+        id: report
         with:
-          name: Test Basic Success (Implicit)
-          conclusion: success
-          output: |
-            {"summary":"50%","text_description":"50%"}
-
-
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: coverage/coverage-summary.json
+          title: Karma Test Coverage
