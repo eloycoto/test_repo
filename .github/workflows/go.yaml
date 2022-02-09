@@ -8,6 +8,17 @@ on:
   pull_request:
     branches: [ main ]
 jobs:
+  test_basic_success_with_output:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: ./
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        name: Test Basic Success (Implicit)
+        conclusion: success
+        output: |
+          {"summary":"Test was a success","text_description":"This is a text description of the annotations and images\nWith more stuff\nAnd more"}
   build:
     runs-on: ubuntu-latest
     permissions:
@@ -22,3 +33,5 @@ jobs:
           conclusion: success
           output: |
             {"summary":"50%","text_description":"50%"}
+
+
