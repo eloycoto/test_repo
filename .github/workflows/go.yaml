@@ -15,6 +15,8 @@ jobs:
     steps:
       - name: Testing on bash
         run: ls .
+
+      - uses: ./
         with:
           name: Test Basic Success (Implicit)
           conclusion: success
