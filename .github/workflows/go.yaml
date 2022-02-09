@@ -8,17 +8,6 @@ on:
   pull_request:
     branches: [ main ]
 jobs:
-  test_basic_success_with_output:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - uses: ./
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        name: Test Basic Success (Implicit)
-        conclusion: success
-        output: |
-          {"summary":"Test was a success","text_description":"This is a text description of the annotations and images\nWith more stuff\nAnd more"}
   build:
     runs-on: ubuntu-latest
     permissions:
@@ -34,3 +23,14 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           path: coverage/coverage-summary.json
           title: Karma Test Coverage
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Testing on bash
+        run: ls .
+      - uses: ouzi-dev/commit-status-updater@v1.1.0
+        ignorefork: false
+        token: ${{ secrets.GITHUB_TOKEN }}
+
